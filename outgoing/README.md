@@ -1,14 +1,13 @@
 Outgoing
 ===
 
-The idea for this contract is that a person can have a smart contract that
-will automatically allow for an address to be the recipient of a periodic
-amount of ETH.
+This smart contract allows multiple addresses to withdraw ETH from the
+contract periodically.
 
-This could be used for any type of periodic payment system, for example:
+This could be used for any type of periodic payment system, like
 
-* Netflix Subscription
-* Twitch Subscription (with one per each streamer)
+* Netflix Subscriptions
+* Twitch Subscriptions (with one per each streamer)
 * Patreon Donations
 
 # Setup
@@ -16,17 +15,17 @@ This could be used for any type of periodic payment system, for example:
 The contract owner can create and over-write a subscription, with one
 subscription per receiving address. Each subscription specifies a
 recipient, amount per payment cycle, and a payment cycle duration. The
-duration of a subscription periodi and amount given must both be greater
-than 0 seconds.
+duration of a subscription period and amount given must both be greater
+than 0.
 
 # Locking/Freezing
 
 Using the `lock()` and `activate()` functions, the owner of the contract
-can choose to completely disable subscription payouts, and subsequently
+can choose to completely disable subscription payouts and subsequently
 re-enable the contract.
 
 The `freezeSubscription()` and `thawSubscription()` functions disable or
-enable specific subscriptions from being able to be paid out.
+enable specific subscriptions from being able to pay out.
 
 # Subscription Payout
 

@@ -70,20 +70,27 @@ contract Outgoing {
         subscriptions[recipient].state = SubState.Active;
     }
     
-    // As the subscription recipient, request that your payment be sent
-    function payout() public inState(State.Active) {
-        require(subscriptions[msg.sender].state == SubState.Active);
-        require(subscriptions[msg.sender].renewTime <= block.timestamp);
-
-        subscriptions[msg.sender].renewTime = block.timestamp + subscriptions[msg.sender].interval;
-        msg.sender.transfer(subscriptions[msg.sender].amount);
-    }
-    
     // Send payment to the subscription recipient, and also check that a
     // specific amount will be transferred.
     function payoutFixed(uint expectedAmount) public inState(State.Active) {
         require(subscriptions[msg.sender].amount == expectedAmount);
 
         payout();
+    }
+    
+    // Send payment to the subscription recipient, only if at least a specified
+    // amount will be sent.
+    function payoutMin(uint minAmount) public inState(State.Active) {
+        require(subscriptions[msg.sender].amount >= minAmount);
+
+        payout();
+    }
+    
+    function payout() private inState(State.Active) {
+        require(subscriptions[msg.sender].state == SubState.Active);
+        require(subscriptions[msg.sender].renewTime <= block.timestamp);
+
+        subscriptions[msg.sender].renewTime = block.timestamp + subscriptions[msg.sender].interval;
+        msg.sender.transfer(subscriptions[msg.sender].amount);
     }
 }

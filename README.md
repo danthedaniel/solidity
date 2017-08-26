@@ -1,0 +1,4 @@
+Solidity
+===
+
+Ethereum Contract Ideas

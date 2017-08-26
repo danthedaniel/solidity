@@ -29,8 +29,8 @@ enable specific subscriptions from being able to pay out.
 
 # Subscription Payout
 
-A recipient of a subscription fee may either call `payout()` to receive
-whatever amount the subscription has stored as its payout amount, or
-they may alternatively utilize the `payoutFixed(uint expectedAmount)`
-function to only have ETH sent if the subscription is set to pay out
-exactly the amount specified by `expectedAmount`.
+A recipient of a subscription fee may either call `payoutMin(uint minAmount)`
+to receive whatever amount the subscription has stored as its payout amount
+(down to a specified minimum), or they may alternatively utilize the
+`payoutFixed(uint expectedAmount)` function to only have ETH sent if the
+subscription is set to pay out exactly the amount specified by `expectedAmount`.
